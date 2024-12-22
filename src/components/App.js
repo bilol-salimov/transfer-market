@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import Modal from "./Modal";
 
 class App extends Component {
   state = {
     players: [],
+    playerModal: false,
+    currentValue: "",
+    currentAge: "",
   };
 
   componentDidMount() {
@@ -31,11 +35,73 @@ class App extends Component {
     });
   };
 
+  openModal = () => {
+    this.setState({
+      playerModal: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      playerModal: false,
+    });
+  };
+
+  changeCurrentValue = (type, isInc) => {
+    const { currentValue, currentAge } = this.state;
+    let newCurrentValue = currentValue ? currentValue : 0;
+    let newCurrentAge = currentAge ? currentAge : 0;
+
+    if (type === "value") {
+      if (isInc) {
+        newCurrentValue++;
+      } else if (newCurrentValue < 1) {
+        newCurrentValue = 0;
+      } else {
+        newCurrentValue--;
+      }
+    }
+
+    if (type === "age") {
+      if (isInc) {
+        newCurrentAge++;
+      } else if (newCurrentAge < 1) {
+        newCurrentAge = 0;
+      } else {
+        newCurrentAge--;
+      }
+    }
+
+    this.setState({
+      currentValue: newCurrentValue,
+      currentAge: newCurrentAge,
+    });
+  };
+
   render() {
-    const { players } = this.state;
+    const { players, playerModal, currentAge, currentValue } = this.state;
     return (
       <>
-        <div className="container bg-light rounded mt-5">
+        <div className="container bg-light rounded mt-3 p-3">
+          <div className="row">
+            <div className="col">
+              <button onClick={this.openModal} className="btn btn-primary">
+                Add Player
+              </button>
+              {playerModal ? (
+                <Modal
+                  changeCurrentValue={this.changeCurrentValue}
+                  closeModal={this.closeModal}
+                  currentAge={currentAge}
+                  currentValue={currentValue}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="container bg-light rounded mt-3">
           <div className="row">
             <div className="col">
               <h1 className="text-center my-3">⚽ Transfers Market</h1>
