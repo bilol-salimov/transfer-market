@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 class Modal extends Component {
   render() {
-    const { closeModal, changeCurrentValue, currentAge, currentValue } =
-      this.props;
+    const { closeModal, changeCurrentValue, currentData } = this.props;
     return (
       <div className="card mt-3">
         <div className="card-header bg-success text-light">
@@ -19,7 +18,7 @@ class Modal extends Component {
               >
                 -
               </button>
-              <button className="btn">{currentAge ? currentAge : 0}</button>
+              <button className="btn">{currentData.age}</button>
               <button
                 onClick={() => changeCurrentValue("age", true)}
                 className="btn btn-info text-light"
@@ -35,9 +34,7 @@ class Modal extends Component {
               >
                 -
               </button>
-              <button className="btn">
-                💰{currentValue ? currentValue : 0}.00m
-              </button>
+              <button className="btn">💰{currentData.value}.00m</button>
               <button
                 onClick={() => changeCurrentValue("value", true)}
                 className="btn btn-info text-light"

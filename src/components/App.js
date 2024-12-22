@@ -5,8 +5,7 @@ class App extends Component {
   state = {
     players: [],
     playerModal: false,
-    currentValue: "",
-    currentAge: "",
+    currentData: { name: "Player", age: 0, club: "Club", value: 0 },
   };
 
   componentDidMount() {
@@ -48,38 +47,35 @@ class App extends Component {
   };
 
   changeCurrentValue = (type, isInc) => {
-    const { currentValue, currentAge } = this.state;
-    let newCurrentValue = currentValue ? currentValue : 0;
-    let newCurrentAge = currentAge ? currentAge : 0;
+    const { currentData } = this.state;
 
     if (type === "value") {
       if (isInc) {
-        newCurrentValue++;
-      } else if (newCurrentValue < 1) {
-        newCurrentValue = 0;
+        currentData.value++;
+      } else if (currentData.value < 1) {
+        currentData.value = 0;
       } else {
-        newCurrentValue--;
+        currentData.value--;
       }
     }
 
     if (type === "age") {
       if (isInc) {
-        newCurrentAge++;
-      } else if (newCurrentAge < 1) {
-        newCurrentAge = 0;
+        currentData.age++;
+      } else if (currentData.age < 1) {
+        currentData.age = 0;
       } else {
-        newCurrentAge--;
+        currentData.age--;
       }
     }
 
     this.setState({
-      currentValue: newCurrentValue,
-      currentAge: newCurrentAge,
+      currentData,
     });
   };
 
   render() {
-    const { players, playerModal, currentAge, currentValue } = this.state;
+    const { players, playerModal, currentData } = this.state;
     return (
       <>
         <div className="container bg-light rounded mt-3 p-3">
@@ -92,8 +88,7 @@ class App extends Component {
                 <Modal
                   changeCurrentValue={this.changeCurrentValue}
                   closeModal={this.closeModal}
-                  currentAge={currentAge}
-                  currentValue={currentValue}
+                  currentData={currentData}
                 />
               ) : (
                 ""
