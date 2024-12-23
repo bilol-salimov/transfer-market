@@ -128,7 +128,7 @@ class App extends Component {
                 <tbody>
                   {players.map((player, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{player.name}</td>
                         <td>{player.age}</td>
