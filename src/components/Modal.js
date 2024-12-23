@@ -2,15 +2,16 @@ import React, { Component } from "react";
 
 class Modal extends Component {
   render() {
-    const { closeModal, changeCurrentValue, currentData } = this.props;
+    const { closeModal, changeCurrentValue, currentData, saveChanges } =
+      this.props;
     return (
       <div className="card mt-3">
         <div className="card-header bg-success text-light">
           <h2>Player Modal</h2>
         </div>
         <div className="card-body text-success">
-          <div className="row">
-            <div className="col">
+          <div className="row text-center">
+            <div className="col-5">
               <h3>Player Age</h3>
               <button
                 onClick={() => changeCurrentValue("age", false)}
@@ -26,7 +27,14 @@ class Modal extends Component {
                 +
               </button>
             </div>
-            <div className="col">
+            <div className="col-2">
+              <img
+                className="img-fluid"
+                src="https://static.vecteezy.com/system/resources/previews/050/018/550/non_2x/modern-abstract-jersey-mockup-isolated-on-transparent-background-great-for-t-shirt-prints-player-apparel-and-product-covers-free-png.png"
+                alt="player t-shirt"
+              />
+            </div>
+            <div className="col-5">
               <h3>Player Value</h3>
               <button
                 onClick={() => changeCurrentValue("value", false)}
@@ -51,7 +59,10 @@ class Modal extends Component {
           >
             Cancel
           </button>
-          <button className="btn btn-light text-success m-1">
+          <button
+            onClick={saveChanges}
+            className="btn btn-light text-success m-1"
+          >
             Save Changes
           </button>
         </div>

@@ -10,16 +10,16 @@ class App extends Component {
 
   componentDidMount() {
     const players = [
-      { name: "Julian Alvarez", age: 22, club: "Atletico Mardir", price: 75 },
-      { name: "Dominic Solanke", age: 23, club: "Tottenham", price: 64.3 },
-      { name: "Leny Yoro", age: 25, club: "Man United", price: 62 },
-      { name: "Pedro Neto", age: 24, club: "Chelsea", price: 60 },
-      { name: "Moussa Diaby", age: 23, club: "Al-Ittihad", price: 60 },
-      { name: "Joao Neves", age: 20, club: "PSG", price: 59.92 },
-      { name: "Amadou Onana", age: 27, club: "Aston Villa", price: 59.35 },
-      { name: "Dani Olma", age: 26, club: "Barcelona", price: 55 },
-      { name: "Teun Koopmeiners", age: 24, club: "Juventus", price: 54.7 },
-      { name: "Micheal Olise", age: 23, club: "Bayern Munich", price: 53 },
+      { name: "Julian Alvarez", age: 22, club: "Atletico Mardir", value: 75 },
+      { name: "Dominic Solanke", age: 23, club: "Tottenham", value: 64.3 },
+      { name: "Leny Yoro", age: 25, club: "Man United", value: 62 },
+      { name: "Pedro Neto", age: 24, club: "Chelsea", value: 60 },
+      { name: "Moussa Diaby", age: 23, club: "Al-Ittihad", value: 60 },
+      { name: "Joao Neves", age: 20, club: "PSG", value: 59.92 },
+      { name: "Amadou Onana", age: 27, club: "Aston Villa", value: 59.35 },
+      { name: "Dani Olma", age: 26, club: "Barcelona", value: 55 },
+      { name: "Teun Koopmeiners", age: 24, club: "Juventus", value: 54.7 },
+      { name: "Micheal Olise", age: 23, club: "Bayern Munich", value: 53 },
     ];
     this.setState({
       players,
@@ -74,6 +74,19 @@ class App extends Component {
     });
   };
 
+  saveChanges = () => {
+    const { currentData, players } = this.state;
+
+    players.push(currentData);
+    this.setState({
+      players,
+    });
+
+    this.setState({
+      currentData: { name: "Player", age: 0, club: "Club", value: 0 },
+    });
+  };
+
   render() {
     const { players, playerModal, currentData } = this.state;
     return (
@@ -89,6 +102,7 @@ class App extends Component {
                   changeCurrentValue={this.changeCurrentValue}
                   closeModal={this.closeModal}
                   currentData={currentData}
+                  saveChanges={this.saveChanges}
                 />
               ) : (
                 ""
@@ -121,7 +135,7 @@ class App extends Component {
                         <td>{player.club}</td>
                         <td>
                           <span className="badge bg-primary">
-                            &euro;{player.price}m
+                            &euro;{player.value}m
                           </span>
                         </td>
                         <td>
